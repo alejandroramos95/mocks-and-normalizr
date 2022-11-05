@@ -9,8 +9,8 @@ socket.on('messages', (data) => {
 function renderChat(data) {
   const html = data
     .map((elemento) => {
-      console.log('asd', elemento)
-      return `<div> <strong style='color:blue'>${elemento.author.id}</strong> 
+      return `<div> <strong style='color:blue'>${elemento.author.id}</strong>
+      <em style='color:brown'>${elemento.date}</em>: 
               <em style='color:green; font-family: Italic'>${elemento.text}</em></div> `
     })
     .join(' ')
@@ -19,15 +19,16 @@ function renderChat(data) {
 
 function addMessage(e) {
   const mensaje = {
-    id: document.getElementById('id').value,
-    nombre: document.getElementById('primernombre').value,
-    apellido: document.getElementById('apellido').value,
-    edad: document.getElementById('edad').value,
-    alias: document.getElementById('alias').value,
-    avatar: document.getElementById('avatar').value,
+    author: {
+      id: document.getElementById('id').value,
+      nombre: document.getElementById('primernombre').value,
+      apellido: document.getElementById('apellido').value,
+      edad: document.getElementById('edad').value,
+      alias: document.getElementById('alias').value,
+      avatar: document.getElementById('avatar').value,
+    },
     text: document.getElementById('text').value,
   }
-  console.log('indexjs mensaje', mensaje)
   socket.emit('new-message', mensaje)
   return false
 }
